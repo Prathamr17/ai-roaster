@@ -1,0 +1,87 @@
+# Dependencies & Package Managers
+node_modules/
+**/node_modules/
+.npm/
+.yarn/
+.pnpm-store/
+*.tgz
+*.tar.gz
+
+# Environment Variables & Secrets
+.env
+.env.*
+*.env
+!.env.example
+!backend/.env.example
+!frontend/.env.example
+!py_backend/.env.example
+backend/.env
+backend/.env.*
+frontend/.env
+frontend/.env.*
+py_backend/.env
+py_backend/.env.*
+
+# Python & Virtual Environments
+venv/
+**/venv/
+.venv/
+**/.venv/
+env/
+**/env/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Production & Build Outputs
+dist/
+**/dist/
+build/
+**/build/
+out/
+*.tsbuildinfo
+
+# Logs & Diagnostics
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Testing & Code Coverage
+coverage/
+.nyc_output/
+
+# Cache, Storage & Temporary Files
+.cache/
+**/cache/
+.vite/
+**/.vite/
+.eslintcache
+temp/
+tmp/
+uploads/
+
+# OS & System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE & Editor Settings
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
