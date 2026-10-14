@@ -20,6 +20,7 @@
   ---
 </div>
 
+
 ## 🌟 Overview
 
 **AI Resume Analyzer** is an enterprise-grade web application designed to help job seekers optimize their resumes for ATS (Applicant Tracking Systems) and recruiter standards. Built with a **glossy glassmorphism design system**, dynamic animations, and **Google Gemini 3.6 Flash AI**, it provides real-time scoring, actionable feedback, keyword matching, version control, and side-by-side diff tracking.
