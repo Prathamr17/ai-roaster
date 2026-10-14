@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&family=Geist:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Geist", "Inter", sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+
+  --radius-card: 20px;
+  --radius-pill: 999px;
+}
+
+:root,
+[data-theme="light"] {
+  --bg: #f4f4f0;
+  --surface: #ffffff;
+  --surface-2: #fafaf7;
+  --border: rgba(15, 17, 21, 0.06);
+  --ink: #0f1115;
+  --ink-muted: #6b7280;
+  --accent: #5b7c6a;
+  --accent-strong: #2f4a3a;
+  --accent-soft: #e6efe8;
+  --accent-hero: #2f4a3a;
+  --accent-hero-2: #436354;
+  --success: #4a7a5d;
+  --warning: #c28a3a;
+  --danger: #b5564e;
+  --shadow-card: 0 1px 3px rgba(15, 17, 21, 0.04),
+    0 1px 2px rgba(15, 17, 21, 0.03);
+  --shadow-hover: 0 6px 20px rgba(15, 17, 21, 0.06);
+}
+
+[data-theme="dark"] {
+  --bg: #0f1115;
+  --surface: #16181d;
+  --surface-2: #1b1e24;
+  --border: rgba(255, 255, 255, 0.06);
+  --ink: #f2f2ee;
+  --ink-muted: #9aa0a6;
+  --accent: #8fb39c;
+  --accent-strong: #b6cfc0;
+  --accent-soft: rgba(143, 179, 156, 0.12);
+  --accent-hero: #1e3024;
+  --accent-hero-2: #2a4234;
+  --success: #8fb39c;
+  --warning: #d4a86a;
+  --danger: #d4847c;
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv11", "ss01";
+}
+
+* {
+  border-color: var(--border);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+.shadow-hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.14);
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
