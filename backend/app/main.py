@@ -15,13 +15,15 @@ logger = logging.getLogger("server")
 
 app = FastAPI(title="AI Resume Roaster API", version="0.1.0", redirect_slashes=False)
 
-# CORS - origin: true (reflect request origin) with credentials, mirroring server.js
+# CORS configuration - allow explicit origins + any vercel.app deployment preview/production
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.client_origins or ["*"],
+    allow_origins=settings.client_origins,
+    allow_origin_regex=r"^https:\/\/.*\.vercel\.app$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
 
 

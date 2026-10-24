@@ -14,12 +14,19 @@ apiClient.interceptors.request.use((config) => {
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
+    // Let browser/axios generate multipart boundary automatically
+    if (config.data instanceof FormData) {
+        delete config.headers["Content-Type"];
+    }
     return config;
 });
 
 apiClient.interceptors.response.use(
     (res) => res,
     (err) => {
+        if (err.response?.status === 401) {
+            localStorage.removeItem("token");
+        }
         const message =
             err.response?.data?.error?.message ||
             err.message ||

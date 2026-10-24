@@ -34,11 +34,21 @@ class Settings(BaseSettings):
 
     @property
     def is_prod(self) -> bool:
-        return self.node_env == "production"
+        import os
+        return (
+            self.node_env.lower() in ("production", "prod")
+            or os.getenv("RENDER", "").lower() == "true"
+            or os.getenv("ENVIRONMENT", "").lower() in ("production", "prod")
+        )
 
     @property
     def client_origins(self) -> List[str]:
-        return [o.strip() for o in self.client_origin.split(",") if o.strip()]
+        origins = [o.strip().rstrip("/") for o in self.client_origin.split(",") if o.strip()]
+        defaults = ["http://localhost:5173", "http://localhost:5174", "http://localhost:3000"]
+        for d in defaults:
+            if d not in origins:
+                origins.append(d)
+        return origins
 
 
 settings = Settings()

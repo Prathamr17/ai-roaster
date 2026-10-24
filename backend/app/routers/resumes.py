@@ -3,7 +3,7 @@ import uuid
 from typing import List, Optional
 
 from beanie import PydanticObjectId
-from fastapi import APIRouter, Depends, Query, UploadFile
+from fastapi import APIRouter, Depends, Form, Query, UploadFile
 from pydantic import BaseModel, Field
 
 from app.core.deps import require_auth
@@ -62,7 +62,11 @@ async def _load_version(resume_id: PydanticObjectId, version_id: str) -> ResumeV
 
 @router.post("", status_code=201)
 @router.post("/", status_code=201)
-async def upload_resume(file: UploadFile, user: User = Depends(require_auth)):
+async def upload_resume(
+    file: UploadFile,
+    title: Optional[str] = Form(None),
+    user: User = Depends(require_auth),
+):
     if file.content_type != "application/pdf":
         raise ApiError.bad_request("Only PDF files are supported")
 
@@ -77,11 +81,11 @@ async def upload_resume(file: UploadFile, user: User = Depends(require_auth)):
     parsed_sections = await parse_structured(raw_text)
 
     filename = file.filename or "resume.pdf"
-    title = filename.rsplit(".", 1)[0]
+    clean_title = (title.strip() if title and title.strip() else None) or filename.rsplit(".", 1)[0]
 
     resume = Resume(
         user_id=user.id,
-        title=title,
+        title=clean_title,
         latest_version_number=1,
     )
     await resume.insert()

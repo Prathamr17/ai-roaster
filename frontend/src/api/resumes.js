@@ -16,7 +16,7 @@ export const resumesApi = {
     fd.append("file", file);
     if (title) fd.append("title", title);
     return apiClient
-      .post("/resumes", fd, { headers: { "Content-Type": "multipart/form-data" } })
+      .post("/resumes", fd)
       .then((r) => r.data);
   },
 
