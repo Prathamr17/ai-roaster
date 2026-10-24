@@ -34,9 +34,10 @@ class PasswordBody(BaseModel):
         populate_by_name = True
 
 
-def _issue_session(response: Response, user: User) -> None:
+def _issue_session(response: Response, user: User) -> str:
     token = sign_token({"sub": str(user.id)})
     response.set_cookie(settings.cookie_name, token, **cookie_kwargs())
+    return token
 
 
 @router.post("/register", status_code=201, dependencies=[Depends(auth_limiter)])
@@ -52,8 +53,8 @@ async def register(body: RegisterBody, response: Response):
     )
     await user.insert()
 
-    _issue_session(response, user)
-    return {"user": user.to_public()}
+    token = _issue_session(response, user)
+    return {"user": user.to_public(), "token": token}
 
 
 @router.post("/login", dependencies=[Depends(auth_limiter)])
@@ -65,8 +66,9 @@ async def login(body: LoginBody, response: Response):
     if not verify_password(body.password, user.password_hash):
         raise ApiError.unauthorized("Invalid credentials")
 
-    _issue_session(response, user)
-    return {"user": user.to_public()}
+    token = _issue_session(response, user)
+    return {"user": user.to_public(), "token": token}
+
 
 
 @router.post("/logout")

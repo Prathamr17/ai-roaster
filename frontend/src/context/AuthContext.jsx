@@ -25,16 +25,29 @@ export function AuthProvider({ children }) {
   }, [refresh]);
 
   const login = useCallback(async (credentials) => {
-    const { user } = await authApi.login(credentials);
-    setUser(user);
-    return user;
+    const data = await authApi.login(credentials);
+    if (data.token) localStorage.setItem("token", data.token);
+    setUser(data.user);
+    return data.user;
   }, []);
 
   const register = useCallback(async (payload) => {
-    const { user } = await authApi.register(payload);
-    setUser(user);
-    return user;
+    const data = await authApi.register(payload);
+    if (data.token) localStorage.setItem("token", data.token);
+    setUser(data.user);
+    return data.user;
   }, []);
+
+  const logout = useCallback(async () => {
+    try {
+      await authApi.logout();
+    } finally {
+      localStorage.removeItem("token");
+      setUser(null);
+      queryClient.clear();
+    }
+  }, [queryClient]);
+
 
   const updateProfile = useCallback(async (payload) => {
     const { user } = await authApi.updateProfile(payload);
@@ -42,14 +55,7 @@ export function AuthProvider({ children }) {
     return user;
   }, []);
 
-  const logout = useCallback(async () => {
-    try {
-      await authApi.logout();
-    } finally {
-      setUser(null);
-      queryClient.clear();
-    }
-  }, [queryClient]);
+
 
   return (
     <AuthContext.Provider value={{ user, loading, login, register, logout, refresh, updateProfile }}>
