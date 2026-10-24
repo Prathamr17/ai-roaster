@@ -6,6 +6,7 @@ from app.core.errors import ApiError
 from app.core.security import verify_token
 from app.models.user import User
 
+
 async def require_auth(request: Request) -> User:
     token = request.cookies.get(settings.cookie_name)
     if not token:

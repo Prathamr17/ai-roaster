@@ -70,7 +70,6 @@ async def login(body: LoginBody, response: Response):
     return {"user": user.to_public(), "token": token}
 
 
-
 @router.post("/logout")
 async def logout(response: Response):
     response.delete_cookie(settings.cookie_name, path="/")
